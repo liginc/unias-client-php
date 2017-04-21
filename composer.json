@@ -1,0 +1,29 @@
+{
+    "name": "liginccojp/unias-client-php",
+    "description": "LIG Unified Account Service OAuth 2.0 Client Provider for The PHP League OAuth2-Client",
+    "keywords": [
+        "oauth2",
+        "authorization",
+        "authentication",
+        "idp",
+        "identity",
+        "sso",
+        "single sign on"
+    ],
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Kazuhisa Togo",
+            "email": "togo_kazuhisa@liginc.co.jp"
+        }
+    ],
+    "require": {
+        "php": "^7.0.0",
+        "league/oauth2-client": "^2.2"
+    },
+    "autoload": {
+        "psr-4": {
+            "Liginc\\UniasClient\\": "src/"
+        }
+    }
+}
