@@ -142,7 +142,7 @@ class UniasProvider extends AbstractProvider
      */
     protected function createResourceOwner(array $response, AccessToken $token): UniasResourceOwner
     {
-        return new UniasResourceOwner($response, 'id');
+        return new UniasResourceOwner($response, 'sub');
     }
 
     /**
