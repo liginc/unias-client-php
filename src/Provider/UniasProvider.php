@@ -63,7 +63,7 @@ class UniasProvider extends AbstractProvider
      */
     public function getResourceOwnerDetailsUrl(AccessToken $token)
     {
-        throw new BadMethodCallException('Resource owner details API endpoint is not yet implemented.');
+        return $this->getApiUrl() .'/v1/account/info';
     }
 
     /**
