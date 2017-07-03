@@ -26,6 +26,11 @@ class UniasProvider extends AbstractProvider
     protected $authorizeUri;
 
     /**
+     * @var string
+     */
+    protected $tokenUri;
+
+    /**
      * @param array $options
      * @param array $collaborators
      */
@@ -51,7 +56,7 @@ class UniasProvider extends AbstractProvider
      */
     public function getBaseAccessTokenUrl(array $params): string
     {
-        return $this->getApiUrl() .'/token';
+        return $this->tokenUri;
     }
 
     /**
@@ -121,7 +126,7 @@ class UniasProvider extends AbstractProvider
         $statusCode = $response->getStatusCode();
         if ($statusCode >= 400) {
             throw new IdentityProviderException(
-                $data['message'] ?: $response->getReasonPhrase(),
+                $data['message'] ?? $response->getReasonPhrase(),
                 $statusCode,
                 $response
             );
@@ -186,6 +191,7 @@ class UniasProvider extends AbstractProvider
         return [
             'apiBaseUri',
             'authorizeUri',
+            'tokenUri',
             'clientId',
             'clientSecret',
             'redirectUri',
@@ -204,7 +210,7 @@ class UniasProvider extends AbstractProvider
         $options = array_intersect_key($options, array_flip($this->getConfigurableOptions()));
 
         // Trim trailing shashes
-        foreach (['apiBaseUri', 'authorizeUri'] as $key) {
+        foreach (['apiBaseUri', 'tokenUri', 'authorizeUri'] as $key) {
             $options[$key] = rtrim($options[$key] ?? '', '/');
         }
 
