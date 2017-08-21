@@ -6,11 +6,13 @@ LIG Unified Account Service OAuth 2.0 Client Provider for The PHP League OAuth2-
 
 - `PHP >= 7.0`
 
-## Documentation
-
-This is a plug-in provider of the [PHP League's OAuth 2.0 Client](https://github.com/thephpleague/oauth2-client), so we suggest you to refer to [the library documentation](https://github.com/thephpleague/oauth2-client/blob/master/README.md#usage) for detailed usage.
-
 ## Usage
+### Installation
+
+```sh
+composer require liginc/unias-client-php
+```
+
 ### Setting up a new client
 
 ```php
@@ -32,3 +34,7 @@ new UniasProvider([
 - **`authorizeUri`:** An URI to the [*Authorization Endpoint*](https://tools.ietf.org/html/rfc6749#section-3.1) of the *Authorization Server*.
 - **`tokenUri`:** An URI to the [*Token Endpoint*](https://tools.ietf.org/html/rfc6749#section-3.2) of the *Authorization Server*.
 - **`apiBaseUri`:** A base URI to the API endpoints of the *Resource Server*.
+
+## Library Documentation
+
+This is a plug-in provider of the [PHP League's OAuth 2.0 Client](https://github.com/thephpleague/oauth2-client), so we suggest you to refer to [the library documentation](https://github.com/thephpleague/oauth2-client/blob/master/README.md#usage) for detailed usage.
