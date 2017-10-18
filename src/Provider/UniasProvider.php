@@ -4,6 +4,7 @@ namespace Liginc\UniasClient\Provider;
 
 use BadMethodCallException;
 use InvalidArgumentException;
+use LogicException;
 use GuzzleHttp\Psr7\Request;
 use League\OAuth2\Client\Provider\AbstractProvider;
 use League\OAuth2\Client\Provider\Exception\IdentityProviderException;
@@ -46,6 +47,10 @@ class UniasProvider extends AbstractProvider
      */
     public function getBaseAuthorizationUrl(): string
     {
+        if(empty($this->authorizeUri)){
+            throw new LogicException('Authorization Code Grant may not be supported: Authorization URL was not configured.');
+        }
+
         return $this->authorizeUri;
     }
 
@@ -56,7 +61,12 @@ class UniasProvider extends AbstractProvider
      */
     public function getBaseAccessTokenUrl(array $params): string
     {
-        return $this->tokenUri;
+        // Kept for backward compatibility with Unias ≦ 1.1.19.
+        if(! empty($this->tokenUri)){
+            return $this->tokenUri;
+        }
+
+        return $this->getApiUrl() .'/oauth2/token';
     }
 
     /**
@@ -178,6 +188,8 @@ class UniasProvider extends AbstractProvider
     protected function getConfigurableOptions(): array
     {
         return array_merge(static::getRequiredOptions(), [
+            'authorizeUri',
+            'tokenUri',
         ]);
     }
 
@@ -190,8 +202,6 @@ class UniasProvider extends AbstractProvider
     {
         return [
             'apiBaseUri',
-            'authorizeUri',
-            'tokenUri',
             'clientId',
             'clientSecret',
             'redirectUri',
