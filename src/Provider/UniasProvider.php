@@ -105,7 +105,7 @@ class UniasProvider extends AbstractProvider
      *
      * @return string
      */
-    protected function getApiUrl(): string
+    public function getApiUrl(): string
     {
         return $this->apiBaseUri;
     }
